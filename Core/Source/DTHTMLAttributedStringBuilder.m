@@ -398,6 +398,18 @@
 	[_tagStartHandlers setObject:[blockquoteBlock copy] forKey:@"blockquote"];
 	
 	
+	void (^codeBlock)(void) = ^
+	{
+		if ([_currentTag.parentElement.name isEqualToString:@"pre"]) {
+		    _currentTag.preserveNewlines = YES;
+		} else {
+		    _currentTag.preserveNewlines = NO;
+		}
+	};
+
+	[_tagStartHandlers setObject:[codeBlock copy] forKey:@"code"];
+	
+	
 	void (^aBlock)(void) = ^
 	{
 		if (_currentTag.isColorInherited || !_currentTag.textColor)
